@@ -34,7 +34,7 @@ iam_test/
 1. Clonez le dépôt :
 
     ```sh
-    git clone <url-du-dépot>
+    git clone https://github.com/ines1102/IAM_Projet.git
     cd iam_test
     ```
 
