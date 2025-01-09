@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Utilisateurs</title>
+</head>
+<body>
+    <h1>Liste des Utilisateurs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="user-list">
+            <!-- Les utilisateurs seront insérés ici par JavaScript -->
+        </tbody>
+    </table>
+    <script>
+        async function fetchUsers() {
+            const response = await fetch('/list-users');
+            const users = await response.json();
+            const userList = document.getElementById('user-list');
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>
+                        <a href="/update-user/${user.id}">Mettre à jour</a>
+                        <a href="/delete-user/${user.id}">Supprimer</a>
+                    </td>
+                `;
+                userList.appendChild(row);
+            });
+        }
+
+        fetchUsers();
+    </script>
+</body>
+</html>

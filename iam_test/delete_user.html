@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supprimer un Utilisateur</title>
+</head>
+<body>
+    <h1>Supprimer un Utilisateur</h1>
+    <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+    <form action="/delete-user" method="POST">
+        <input type="hidden" id="user_id" name="user_id" value=""><br><br>
+        <button type="submit">Supprimer</button>
+    </form>
+    <script>
+        async function fetchUser() {
+            const userId = window.location.pathname.split('/').pop();
+            const response = await fetch(`/get-user/${userId}`);
+            const user = await response.json();
+
+            document.getElementById('user_id').value = user.id;
+        }
+
+        fetchUser();
+    </script>
+</body>
+</html>
