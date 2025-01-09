@@ -32,7 +32,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     .set_redirect_uri(redirect_url);
 
     // Generate the authorization URL
-    let (auth_url, csrf_token, _) = client
+    let (auth_url, csrf_token, nonce) = client
         .authorize_url(
             AuthenticationFlow::<CoreResponseType>::AuthorizationCode,
             CsrfToken::new_random,
@@ -43,7 +43,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     println!("Access this URL to authenticate: {}", auth_url);
     println!("CSRF token: {}", csrf_token.secret());
+    println!("Nonce: {}", nonce.secret());
 
-    // Here, you should start a web server to handle the redirect URL
+    // Provide a logout URL
+    let logout_url = format!("http://localhost:8080/realms/myrealm/protocol/openid-connect/logout?redirect_uri=http://localhost:8000");
+    println!("Access this URL to logout: {}", logout_url);
+
     Ok(())
 }
