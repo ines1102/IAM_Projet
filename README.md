@@ -22,12 +22,14 @@ Ce projet est une démonstration de l'intégration de Keycloak avec une applicat
     - Notez l'ID client (`client_id`) et le secret client (`client_secret`).
 
 ## Structure du Projet
+```sh
 iam_test/
 ├── Cargo.toml
 ├── src/
 │ ├── main.rs
 │ └── server.rs
 └── response.html
+```
 
 ## Installation et Lancement
 
