@@ -5,14 +5,16 @@ services:
     image: quay.io/keycloak/keycloak:26.0.7
     container_name: keycloak
     environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: your_password
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
-      KC_IMPORT: /opt/keycloak/data/import/myrealm.json
     ports:
       - "8080:8080"
     volumes:
-      - ./myrealm.json:/opt/keycloak/data/import/myrealm.json
-      - ./master-realm.json:/opt/keycloak/data/import/master-realm.json
+      - ./export:/opt/keycloak/data/export
     command: start-dev
 
   postgres:
@@ -21,7 +23,7 @@ services:
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak_user
-      POSTGRES_PASSWORD: your_password
+      POSTGRES_PASSWORD: vitrygtr
     ports:
       - "5432:5432"
     volumes:
